@@ -35,7 +35,8 @@ def find_links(text): #Expects list of strings
         parse_data = urlparse(url)
 
         if parse_data.scheme == "http" or parse_data.scheme == "https":
-            links.append(parse_data.scheme+"://"+parse_data.netloc+parse_data.path)
+            msg = parse_data.scheme+"://"+parse_data.netloc+parse_data.path               
+            links.append(msg)
 
     return links
 
@@ -57,3 +58,17 @@ def load_webpage(url, logging=None):
 def get_domain_name(full_url):
     parse_data = urlparse(full_url)
     return parse_data.scheme+"://"+parse_data.netloc
+
+def extract_keywords(url):
+    parse_data = urlparse(url)
+
+    keywords = []
+
+    split = parse_data.netloc.split('.')[:-1]
+
+    for keyword in split:
+        if keyword != "www":
+            keywords.append(keyword)
+
+    return keywords
+        
